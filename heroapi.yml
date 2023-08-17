@@ -1,0 +1,749 @@
+openapi: "3.0.0"
+info:
+  version: "1.0.0"
+  title: "Hero API"
+servers:
+  - url: "https://hero.page"
+paths:
+  /api/v1/createSpace:
+    post:
+      summary: "Create a new Space"
+      operationId: "createSpace"
+      tags:
+        - "Space"
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: "object"
+              properties:
+                name:
+                  type: "string"
+                  description: "The name of the space"
+                  example: "My wonderful space"
+                isPublic:
+                  type: "boolean"
+                  description: "Whether the space is public"
+                  example: true
+                img:
+                  type: "string"
+                  description: "Image URL for the space"
+                  example: "https://firebasestorage.googleapis.com/v0/b/focushero-1650416072840.appspot.com/o/FCMImages%2Fdefault_spacey.webp?alt=media&token=e37eecbd-6b99-430c-b073-b57622ef8440"
+      responses:
+        '201':
+          description: "Space created successfully"
+          content:
+            application/json:
+              schema:
+                type: "object"
+                properties:
+                  id:
+                    type: "string"
+                    description: "The ID of the created space"
+                  shareable_link:
+                    type: "string"
+                    description: "Shareable link if the space is public"
+                  online_editor:
+                    type: "string"
+                    description: "Link to the online editor for the space"
+                  space:
+                    type: "object"
+                    properties:
+                      id:
+                        type: "string"
+                      createdAt:
+                        type: "string"
+                        format: "date-time"
+                      img:
+                        type: "string"
+                      name:
+                        type: "string"
+                      slug:
+                        type: "string"
+                      isOwner:
+                        type: "boolean"
+        '400':
+          description: "Bad Request"
+        '500':
+          description: "Internal Server Error"
+  /api/v1/getSpace/{spaceId}:
+    get:
+      summary: "Retrieve details of a specific Space"
+      operationId: "getSpace"
+      tags:
+        - "Space"
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: "spaceId"
+          in: "path"
+          required: true
+          schema:
+            type: "string"
+          description: "The ID of the space"
+      responses:
+        '200':
+          description: "Space retrieved successfully"
+          content:
+            application/json:
+              schema:
+                type: "object"
+                properties:
+                  id:
+                    type: "string"
+                    description: "The ID of the retrieved space"
+                  createdAt:
+                    type: "string"
+                    format: "date-time"
+                  img:
+                    type: "string"
+                    description: "Image URL for the space"
+                  name:
+                    type: "string"
+                    description: "The name of the space"
+                  slug:
+                    type: "string"
+                    description: "The slug of the space"
+                  isOwner:
+                    type: "boolean"
+                    description: "Whether the user is the owner of the space"
+        '404':
+          description: "Not Found"
+        '500':
+          description: "Internal Server Error"
+  /api/v1/updateSpace/{spaceId}:
+    post:
+      summary: "Update details of a specific Space"
+      operationId: "updateSpace"
+      tags:
+        - "Space"
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: "spaceId"
+          in: "path"
+          required: true
+          schema:
+            type: "string"
+          description: "The ID of the space"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: "object"
+              properties:
+                name:
+                  type: "string"
+                  description: "The name of the space"
+                  example: "Updated Space Name"
+                isPublic:
+                  type: "boolean"
+                  description: "Whether the space is public"
+                  example: true
+                img:
+                  type: "string"
+                  description: "Image URL for the space"
+                  example: "https://firebasestorage.googleapis.com/v0/b/focushero-1650416072840.appspot.com/o/FCMImages%2Fdefault_spacey.webp?alt=media&token=e37eecbd-6b99-430c-b073-b57622ef8440"
+      responses:
+        '200':
+          description: "Space updated successfully"
+          content:
+            text/plain:
+              schema:
+                type: "string"
+                example: "OK"
+        '400':
+          description: "Bad Request"
+        '404':
+          description: "Not Found"
+        '500':
+          description: "Internal Server Error"
+  /api/v1/listSpaces:
+    get:
+      summary: "List all Spaces for a user"
+      operationId: "listSpaces"
+      tags:
+        - "Space"
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: "Spaces retrieved successfully"
+          content:
+            application/json:
+              schema:
+                type: "array"
+                items:
+                  type: "object"
+                  properties:
+                    id:
+                      type: "string"
+                      description: "The ID of the space"
+                    dateJoined:
+                      type: "string"
+                      format: "date-time"
+                      description: "The date when the space was joined"
+        '500':
+          description: "Internal Server Error"
+  /api/v1/deleteSpace/{spaceId}:
+    post:
+      summary: "Delete a specific Space"
+      operationId: "deleteSpace"
+      tags:
+        - "Space"
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: "spaceId"
+          in: "path"
+          required: true
+          schema:
+            type: "string"
+          description: "The ID of the space"
+      responses:
+        '204':
+          description: "Space deleted successfully"
+        '404':
+          description: "Space not found"
+  /api/v1/createList:
+    post:
+      summary: "Create a new List in a specified Space"
+      operationId: "createList"
+      tags:
+        - "List"
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: "object"
+              properties:
+                spaceId:
+                  type: "string"
+                  description: "The ID of the space"
+                name:
+                  type: "string"
+                  description: "The name of the list"
+                color:
+                  type: "string"
+                  description: "The color code for the list"
+              required:
+                - spaceId
+                - name
+                - color
+      responses:
+        '201':
+          description: "List created successfully"
+          content:
+            application/json:
+              schema:
+                type: "object"
+                properties:
+                  id:
+                    type: "string"
+                  page:
+                    type: "object"
+                    properties:
+                      name:
+                        type: "string"
+                      color:
+                        type: "string"
+                      spaceID:
+                        type: "string"
+                      sortIndex:
+                        type: "integer"
+                      createdAt:
+                        type: "string"
+                        format: "date-time"
+                      workflow_type:
+                        type: "string"
+        '400':
+          description: "Bad Request"
+  /api/v1/getList/{spaceId}/{listId}:
+    get:
+      summary: "Retrieve details of a specific List"
+      operationId: "getList"
+      tags:
+        - "List"
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: "spaceId"
+          in: "path"
+          required: true
+          description: "The ID of the space"
+          schema:
+            type: "string"
+        - name: "listId"
+          in: "path"
+          required: true
+          description: "The ID of the list"
+          schema:
+            type: "string"
+      responses:
+        '200':
+          description: "OK"
+          content:
+            application/json:
+              schema:
+                type: "object"
+                properties:
+                  id:
+                    type: "string"
+                  name:
+                    type: "string"
+                  color:
+                    type: "string"
+                  spaceID:
+                    type: "string"
+                  sortIndex:
+                    type: "integer"
+                  createdAt:
+                    type: "string"
+                    format: "date-time"
+                  workflow_type:
+                    type: "string"
+        '404':
+          description: "List not found"
+        '400':
+          description: "Bad Request"
+  /api/v1/updateList/{spaceId}/{listId}:
+    post:
+      summary: "Update details of a specific List"
+      operationId: "updateList"
+      tags:
+        - "List"
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: "spaceId"
+          in: "path"
+          required: true
+          description: "The ID of the space"
+          schema:
+            type: "string"
+        - name: "listId"
+          in: "path"
+          required: true
+          description: "The ID of the list"
+          schema:
+            type: "string"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: "object"
+              properties:
+                name:
+                  type: "string"
+                  description: "The name of the list"
+                color:
+                  type: "string"
+                  description: "The color code for the list"
+      responses:
+        '200':
+          description: "OK"
+        '400':
+          description: "Bad Request"
+  /api/v1/deleteList/{spaceId}/{listId}:
+    post:
+      summary: "Delete a specific List"
+      operationId: "deleteList"
+      tags:
+        - "List"
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: "spaceId"
+          in: "path"
+          required: true
+          description: "The ID of the space"
+          schema:
+            type: "string"
+        - name: "listId"
+          in: "path"
+          required: true
+          description: "The ID of the list"
+          schema:
+            type: "string"
+      responses:
+        '204':
+          description: "No Content"
+        '404':
+          description: "List not found"
+  /api/v1/listLists/{spaceId}:
+    get:
+      summary: List all Lists within a specific Space
+      operationId: "listLists"
+      tags:
+        - "List"
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: spaceId
+          in: path
+          description: The ID of the space
+          required: true
+          schema:
+            type: string
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: string
+                    name:
+                      type: string
+                    color:
+                      type: string
+                    spaceID:
+                      type: string
+                    sortIndex:
+                      type: number
+                    createdAt:
+                      type: string
+                      format: date-time
+                    workflow_type:
+                      type: string
+        400:
+          description: Bad Request
+  /api/v1/createItem/{spaceId}:
+    post:
+      operationId: "createItem"
+      tags:
+        - "Item"
+      summary: "Creates a new item in a specified List, within a Space."
+      parameters:
+        - name: spaceId
+          in: path
+          description: The ID of the space where the item will be created. Must be a non-empty string.
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                listId:
+                  type: string
+                  description: The ID of the list within the space where the item will be created. Must be a non-empty string.
+                title:
+                  type: string
+                  description: The title of the item. Must be a non-empty string.
+                note:
+                  type: string
+                  description: The note content of the item. Optional.
+                image:
+                  type: string
+                  description: The URL of the image associated with the item. Optional.
+                link:
+                  type: string
+                  description: The URL of the link associated with the item. Optional.
+                submitted_by:
+                  type: object
+                  properties:
+                    uid:
+                      type: string
+                    img:
+                      type: string
+                    username:
+                      type: string
+                generated_by:
+                  type: object
+                  properties:
+                    model:
+                      type: string
+                    job_id:
+                      type: string
+                    appDescription:
+                      type: string
+                    appSubtitle:
+                      type: string
+                    appID:
+                      type: string
+                    appName:
+                      type: string
+                    appIcon:
+                      type: string
+                    appTags:
+                      type: array
+                      items:
+                        type: string
+                isAIPrompt:
+                  type: boolean
+                  default: false
+      responses:
+        201:
+          description: Created
+        400:
+          description: Bad Request
+      security:
+        - bearerAuth: []
+  /api/v1/updateItem/{spaceId}/{itemId}:
+    post:
+      operationId: "updateItem"
+      tags:
+        - "Item"
+      summary: Updates details of a specific Item in a specific Space.
+      parameters:
+        - name: spaceId
+          in: path
+          description: The ID of the space where the item is located. Must be a non-empty string.
+          required: true
+          schema:
+            type: string
+            example: "EeQKVCfV0tsoQwmeE0nA"
+        - name: itemId
+          in: path
+          description: The ID of the item to update. Must be a non-empty string.
+          required: true
+          schema:
+            type: string
+            example: "hRzp9xTTl5pnj2G2Nr3E"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                title:
+                  type: string
+                  description: The new title of the item. Optional.
+                  example: "Update item title 2"
+                note:
+                  type: string
+                  description: The new note content of the item. Optional.
+                  example: "This is my `wonderful` note"
+                image:
+                  type: string
+                  description: The new URL of the image associated with the item. Optional.
+                  example: "https://media.discordapp.net/attachments/1069316234291712020/1105446908962558022/samoshasfallen_Design_a_bustling_fantasy_marketplace_filled_wit_6b011c6f-6d0c-4e52-b65b-c76f313ef5f4.png"
+                link:
+                  type: string
+                  description: The new URL of the link associated with the item. Optional.
+      responses:
+        200:
+          description: Updated
+        400:
+          description: Bad Request
+      security:
+        - bearerAuth: []
+  /api/v1/getItem/{spaceId}/{itemId}:
+    get:
+      summary: Retrieve details of a specific Item.
+      operationId: "getItem"
+      tags:
+        - "Item"
+      parameters:
+        - name: spaceId
+          in: path
+          description: The ID of the space where the item is located. Must be a non-empty string.
+          required: true
+          schema:
+            type: string
+            example: "F5VHE7m4xJJpXcZXcqut"
+        - name: itemId
+          in: path
+          description: The ID of the item to retrieve. Must be a non-empty string.
+          required: true
+          schema:
+            type: string
+            example: "xVkvt0FpsagnnhvmpdAi"
+      security:
+        - bearerAuth: []
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: string
+                  title:
+                    type: string
+                  note:
+                    type: string
+                  img:
+                    type: string
+                  url:
+                    type: string
+                  pageID:
+                    type: string
+                  spaceID:
+                    type: string
+                  sortIndex:
+                    type: integer
+                  send_approval_email:
+                    type: boolean
+                  readMorePageSlug:
+                    type: string
+                  is_archived:
+                    type: boolean
+                  completed:
+                    type: boolean
+                  actionType:
+                    type: string
+                  fileURL:
+                    type: string
+                  fileName:
+                    type: string
+                  createdAt:
+                    type: string
+                    format: date-time
+                  is_image_full_width:
+                    type: boolean
+                  submitted_by:
+                    type: object
+                  urlMetadata:
+                    type: object
+                  image_generated_on_hero:
+                    type: boolean
+                  isAIPrompt:
+                    type: boolean
+                  owner_uid:
+                    type: string
+                  ticketType:
+                    type: string
+                  generated_by:
+                    type: object
+        400:
+          description: Bad Request
+        404:
+          description: Not Found
+  /api/v1/listItems/{spaceId}/{listId}:
+    get:
+      summary: List all Items within a specific List.
+      operationId: "listItems"
+      tags:
+        - "Item"
+      parameters:
+        - name: spaceId
+          in: path
+          description: The ID of the space where the items are located. Must be a non-empty string.
+          required: true
+          schema:
+            type: string
+            example: "EeQKVCfV0tsoQwmeE0nA"
+        - name: listId
+          in: path
+          description: The ID of the list within the space where the items are located. Must be a non-empty string.
+          required: true
+          schema:
+            type: string
+            example: "pHr8bQnV2FIgGdO2LVrt"
+      security:
+        - bearerAuth: []
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: string
+                    title:
+                      type: string
+                    note:
+                      type: string
+                    img:
+                      type: string
+                    url:
+                      type: string
+                    pageID:
+                      type: string
+                    spaceID:
+                      type: string
+                    sortIndex:
+                      type: integer
+                    send_approval_email:
+                      type: boolean
+                    readMorePageSlug:
+                      type: string
+                    is_archived:
+                      type: boolean
+                    completed:
+                      type: boolean
+                    actionType:
+                      type: string
+                    fileURL:
+                      type: string
+                    fileName:
+                      type: string
+                    createdAt:
+                      type: string
+                      format: date-time
+                    is_image_full_width:
+                      type: boolean
+                    submitted_by:
+                      type: object
+                    urlMetadata:
+                      type: object
+                    image_generated_on_hero:
+                      type: boolean
+                    isAIPrompt:
+                      type: boolean
+                    owner_uid:
+                      type: string
+                    ticketType:
+                      type: string
+                    generated_by:
+                      type: object
+        400:
+          description: Bad Request
+  /api/v1/deleteItem/{spaceId}/{itemId}:
+    post:
+      summary: Delete a specific Item within a specific Space.
+      operationId: "deleteItem"
+      tags:
+        - "Item"
+      parameters:
+        - name: spaceId
+          in: path
+          description: The ID of the space where the item is located. Must be a non-empty string.
+          required: true
+          schema:
+            type: string
+            example: "EeQKVCfV0tsoQwmeE0nA"
+        - name: itemId
+          in: path
+          description: The ID of the item to delete. Must be a non-empty string.
+          required: true
+          schema:
+            type: string
+            example: "0p15DJTXOl5kQPhTUiv3"
+      security:
+        - bearerAuth: []
+      responses:
+        204:
+          description: No Content
+        400:
+          description: Bad Request
+        404:
+          description: Not Found
+components:
+  securitySchemes:
+    bearerAuth:
+      type: "http"
+      scheme: "bearer"
+      bearerFormat: "JWT"
