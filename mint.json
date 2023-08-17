@@ -4,7 +4,7 @@
   "name": "Hero API Docs - Spaces, Lists & Items API",
   "logo": {
     "dark": "/logo/dark.svg",
-    "light": "/logo/light.svg"
+    "light": "/logo/dark.svg"
   },
   "favicon": "/favicon.png",
   "colors": {
@@ -12,7 +12,7 @@
     "light": "#AE87FF",
     "dark": "#0D001D",
     "background": {
-      "light": "#AE87FF"
+      "dark": "#090014"
     },
     "anchors": {
       "from": "#FF7F57",
