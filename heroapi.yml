@@ -454,15 +454,6 @@ paths:
                 link:
                   type: string
                   description: The URL of the link associated with the item. Optional.
-                submitted_by:
-                  type: object
-                  properties:
-                    uid:
-                      type: string
-                    img:
-                      type: string
-                    username:
-                      type: string
                 generated_by:
                   type: object
                   properties:
@@ -488,8 +479,62 @@ paths:
                   type: boolean
                   default: false
       responses:
-        201:
-          description: Created
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: string
+                  title:
+                    type: string
+                  note:
+                    type: string
+                  img:
+                    type: string
+                  url:
+                    type: string
+                  pageID:
+                    type: string
+                  spaceID:
+                    type: string
+                  sortIndex:
+                    type: integer
+                  send_approval_email:
+                    type: boolean
+                  readMorePageSlug:
+                    type: string
+                  is_archived:
+                    type: boolean
+                  completed:
+                    type: boolean
+                  actionType:
+                    type: string
+                  fileURL:
+                    type: string
+                  fileName:
+                    type: string
+                  createdAt:
+                    type: string
+                    format: date-time
+                  is_image_full_width:
+                    type: boolean
+                  submitted_by:
+                    type: object
+                  urlMetadata:
+                    type: object
+                  image_generated_on_hero:
+                    type: boolean
+                  isAIPrompt:
+                    type: boolean
+                  owner_uid:
+                    type: string
+                  ticketType:
+                    type: string
+                  generated_by:
+                    type: object
         400:
           description: Bad Request
       security:
