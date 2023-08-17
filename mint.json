@@ -39,7 +39,7 @@
     {
       "name": "Documentation",
       "icon": "book-open-cover",
-      "url": "https://hero.mintlify.com"
+      "url": "https://hero.mintlify.app"
     },
     {
       "name": "Discord",
@@ -49,12 +49,12 @@
     {
       "name": "Blog",
       "icon": "newspaper",
-      "url": "https://hero.page.com/blog"
+      "url": "https://hero.page/blog"
     },
     {
       "name": "Space Templates",
       "icon": "paper",
-      "url": "https://hero.page.com/templates"
+      "url": "https://hero.page/templates"
     }
   ],
   "navigation": [
