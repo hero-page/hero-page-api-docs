@@ -54,24 +54,33 @@
   ],
   "navigation": [
     {
-      "group": "Get Started",
-      "pages": ["introduction", "quickstart", "development"]
-    },
-    {
-      "group": "Essentials",
-      "pages": ["essentials/markdown", "essentials/code", "essentials/images", "essentials/settings", "essentials/navigation"]
-    },
-    {
-      "group": "API Documentation",
-      "pages": ["api-reference/authentication"]
-    },
-    {
-      "group": "Endpoint Examples",
+      "group": "Spaces",
       "pages": [
-        "api-reference/endpoint/get",
-        "api-reference/endpoint/create",
-        "api-reference/endpoint/update",
-        "api-reference/endpoint/delete"
+        "space/create-a-new-space", 
+        "space/delete-a-specific-space",
+        "space/list-all-spaces-for-a-user",
+        "space/retrieve-details-of-a-specific-space",
+        "space/update-details-of-a-specific-space"
+      ]
+    },
+    {
+      "group": "List",
+      "pages": [
+        "list/create-a-new-list-in-a-specified-space",
+        "list/delete-a-specific-list",
+        "list/list-all-lists-within-a-specific-space",
+        "list/retrieve-details-of-a-specific-list",
+        "list/update-details-of-a-specific-list"
+      ]
+    },
+    {
+      "group": "Item",
+      "pages": [
+        "item/creates-a-new-item-in-a-specified-list-within-a-space",
+        "item/delete-a-specific-item-within-a-specific-space",
+        "item/list-all-items-within-a-specific-list",
+        "item/retrieve-details-of-a-specific-item",
+        "item/updates-details-of-a-specific-item-in-a-specific-space"
       ]
     }
   ],
