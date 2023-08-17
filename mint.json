@@ -59,6 +59,12 @@
   ],
   "navigation": [
     {
+      "group": "Getting Start",
+      "pages": [
+        "introduction"
+      ]
+    },
+    {
       "group": "Spaces",
       "pages": [
         "space/create-a-new-space", 

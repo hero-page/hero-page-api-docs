@@ -1,71 +1,76 @@
 ---
-title: Introduction
-description: "Welcome to the home of your new documentation"
+title: Welcome to Hero API Docs 🚀
+description: "Unlock the power of Hero Platform in your projects with Hero API"
 ---
 
 <img
   className="block dark:hidden"
-  src="/images/hero-light.svg"
-  alt="Hero Light"
+  src="/images/hero-api-light.svg"
+  alt="Hero API Light"
 />
 <img
   className="hidden dark:block"
-  src="/images/hero-dark.svg"
-  alt="Hero Dark"
+  src="/images/hero-api-dark.svg"
+  alt="Hero API Dark"
 />
 
-## Setting up
-
-The first step to world-class documentation is setting up your editing environnments.
+## What You Can Do With Hero API
 
 <CardGroup cols={2}>
   <Card
-    title="Edit Your Docs"
-    icon="pen-to-square"
-    href="https://mintlify.com/docs/quickstart"
-  >
-    Get your docs set up locally for easy development
-  </Card>
+    title="Create Your Own Spaces"
+    icon="globe"
+    description="Create virtual rooms to host various types of content."
+  />
   <Card
-    title="Preview Changes"
+    title="Organize Content with Lists"
+    icon="list"
+    description="Categorize and find your content easily."
+  />
+  <Card
+    title="Handle Items with Ease"
     icon="image"
-    href="https://mintlify.com/docs/development"
-  >
-    Preview your changes before you push to make sure they're perfect
-  </Card>
+    description="Add, update, or delete items like photos, videos, and notes."
+  />
+  <Card
+    title="Markdown Support"
+    icon="edit"
+    description="Format your text with Markdown. Simple and powerful."
+  />
 </CardGroup>
 
-## Make it yours
+## Get Started with Hero API
 
-Update your docs to your brand and add valuable content for the best user conversion.
+1. Sign in at [Hero Page](https://hero.page).
+2. Click your profile picture on the top right.
+3. Go to "Account Settings" -> "Get API Key."
+4. Your API Key will appear.
+
+## Quick Example
+
+```javascript
+import { HeroAPI } from "hero-api";
+const hero = new HeroAPI('YOUR_API_TOKEN');
+hero.createSpace('My Amazing Space', true, "https://picsum.photos/600/500").then(space => {
+  console.log('Space created:', space);
+});
+```
 
 <CardGroup cols={2}>
   <Card
-    title="Customize Style"
-    icon="palette"
-    href="https://mintlify.com/docs/settings/global"
+    title="Why Choose Hero API?"
+    icon="star"
+    href="#why-use-hero-api"
   >
-    Customize your docs to your company's colors and brands
+    Integrate Hero Platform into your projects. Endless possibilities!
   </Card>
   <Card
-    title="Reference APIs"
-    icon="code"
-    href="https://mintlify.com/docs/api-playground/openapi"
+    title="Explore More"
+    icon="rocket"
+    href="#explore-more"
   >
-    Automatically generate endpoints from an OpenAPI spec
-  </Card>
-  <Card
-    title="Add Components"
-    icon="screwdriver-wrench"
-    href="https://mintlify.com/docs/components/accordion"
-  >
-    Build interactive features and designs to guide your users
-  </Card>
-  <Card
-    title="Get Inspiration"
-    icon="stars"
-    href="https://mintlify.com/showcase"
-  >
-    Check out our showcase of our favorite documentation
+    Dive into Space Management, List Management, and Item Management.
   </Card>
 </CardGroup>
+Ready to Build Something Amazing?
+Dive into the Hero API Playground and let your creativity flow!
