@@ -61,7 +61,7 @@ conn = http.client.HTTPSConnection("hero.page")
 payload = "{\n  \"img\": \"https://picsum.photos/200/300\",\n  \"isPublic\": true,\n  \"name\": \"Your Amazing Space\"\n}"
 
 headers = {
-    'Authorization': "Bearer YOUR_API_KEY",
+    'Authorization': "Bearer YOUR_API_TOKEN",
     'Content-Type': "application/json"
     }
 
@@ -72,6 +72,10 @@ data = res.read()
 
 print(data.decode("utf-8"))
 ```
+
+<Tip>
+  More SDKs are coming, join the [Hero Discord](https://discord.com/invite/QkXkGsEt8G) to stay updated!
+</Tip>
 
 <CardGroup cols={2}>
   <Card
@@ -89,5 +93,7 @@ print(data.decode("utf-8"))
     Dive into Space Management, List Management, and Item Management.
   </Card>
 </CardGroup>
+
 Ready to Build Something Amazing?
-Dive into the Hero API Playground and let your creativity flow!
+
+Dive into the [Hero API Playground](https://docs.hero.page/space/create-a-new-space) and let your creativity flow!
