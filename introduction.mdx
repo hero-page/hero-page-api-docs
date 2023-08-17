@@ -4,14 +4,8 @@ description: "Unlock the power of Hero Platform in your projects with Hero API"
 ---
 
 <img
-  className="block dark:hidden"
-  src="/images/hero-light.svg"
-  alt="Hero API Light"
-/>
-<img
-  className="hidden dark:block"
-  src="/images/hero-dark.svg"
-  alt="Hero API Dark"
+  src="/images/social_hero.jpg"
+  alt="Hero API Splash Featured Image (https://hero.page)"
 />
 
 ## What You Can Do With Hero API
@@ -34,7 +28,7 @@ description: "Unlock the power of Hero Platform in your projects with Hero API"
   />
   <Card
     title="Markdown Support"
-    icon="edit"
+    icon="pencil"
     description="Format your text with Markdown. Simple and powerful."
   />
 </CardGroup>
@@ -46,7 +40,7 @@ description: "Unlock the power of Hero Platform in your projects with Hero API"
 3. Go to "Account Settings" -> "Get API Key."
 4. Your API Key will appear.
 
-## Quick Example
+## Example using the [Hero Node.js SDK](https://www.npmjs.com/package/hero-api)
 
 ```javascript
 import { HeroAPI } from "hero-api";
@@ -54,6 +48,28 @@ const hero = new HeroAPI('YOUR_API_TOKEN');
 hero.createSpace('My Amazing Space', true, "https://picsum.photos/600/500").then(space => {
   console.log('Space created:', space);
 });
+```
+
+## Example using Python
+
+```python
+import http.client
+
+conn = http.client.HTTPSConnection("hero.page")
+
+payload = "{\n  \"img\": \"https://picsum.photos/200/300\",\n  \"isPublic\": true,\n  \"name\": \"Your Amazing Space\"\n}"
+
+headers = {
+    'Authorization': "Bearer YOUR_API_KEY",
+    'Content-Type': "application/json"
+    }
+
+conn.request("POST", "/api/v1/createSpace", payload, headers)
+
+res = conn.getresponse()
+data = res.read()
+
+print(data.decode("utf-8"))
 ```
 
 <CardGroup cols={2}>
