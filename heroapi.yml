@@ -786,6 +786,47 @@ paths:
           description: Bad Request
         404:
           description: Not Found
+  /api/v1/uploadImage:
+    post:
+      summary: "Uploads an image encoded in base64 to the specified storage bucket."
+      operationId: "uploadImage"
+      tags:
+        - "Image"
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: "object"
+              properties:
+                base64:
+                  type: "string"
+                  description: "The base64-encoded image"
+                  format: "byte"
+                  example: "data:image/png;base64,iVBORw0KG..."
+                name:
+                  type: "string"
+                  description: "Optional name prefix for the uploaded image, limited to 100 characters"
+                  maxLength: 100
+                  example: "ProfileImage"
+      responses:
+        '201':
+          description: "Image uploaded successfully"
+          content:
+            application/json:
+              schema:
+                type: "object"
+                properties:
+                  url:
+                    type: "string"
+                    description: "The signed URL of the uploaded image"
+                    example: "https://url-for-image-example.com/api_images_YourFileName_1628009230000.png"
+        '400':
+          description: "Bad Request. Reasons might include no base64 string provided, name length exceeding 100 characters, or base64 size exceeding 10MB."
+        '500':
+          description: "Internal Server Error"
 components:
   securitySchemes:
     bearerAuth:

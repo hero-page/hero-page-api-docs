@@ -93,6 +93,12 @@
         "item/retrieve-details-of-a-specific-item",
         "item/updates-details-of-a-specific-item-in-a-specific-space"
       ]
+    },
+    {
+      "group": "Image",
+      "pages": [
+        "image/uploads-an-image-encoded-in-base64-to-the-specified-storage-bucket"
+      ]
     }
   ],
   "footerSocials": {
